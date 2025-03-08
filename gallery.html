@@ -1,0 +1,52 @@
+<!-- gallery.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - NMIMS Indore</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+                text-align: center;
+            color: rgb(8, 4, 4);
+        }
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+        .gallery-item {
+            width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>NMIMS Indore Gallery</h1>
+    <div class="gallery-container">
+        <div class="gallery-item"><img src="https://nmims.edu/assets/images/indore1.jpg" alt="NMIMS Indore Campus"></div>
+        <div class="gallery-item"><img src="https://nmims.edu/assets/images/indore2.jpg" alt="Library"></div>
+        <div class="gallery-item"><img src="https://nmims.edu/assets/images/indore3.jpg" alt="Classrooms"></div>
+        <div class="gallery-item"><img src="https://nmims.edu/assets/images/indore4.jpg" alt="Cafeteria"></div>
+        <div class="gallery-item"><img src="https://nmims.edu/assets/images/indore5.jpg" alt="Sports Complex"></div>
+    </div>
+</body>
+</html>

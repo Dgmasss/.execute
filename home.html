@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FestX - College Fest Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #12192c, #1b2236);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(10, 10, 20, 0.9);
+            color: white;
+            padding: 15px 0;
+            font-family: 'Raleway', sans-serif;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #ff3b3b;
+        }
+
+        /* Home Section Styling */
+        #home {
+            padding: 130px 30px 40px;
+            background: url('C:/Users/nishi/OneDrive/Desktop/WhatsApp Image 2025-03-08 at 13.33.52_7bca95fd.jpg') no-repeat center center/cover;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            margin: 50px auto;
+            width: 85%;
+            box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+
+        #home h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ff3b3b;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff3b3b, #ff7878);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        #home h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Highlights Section */
+        .highlights-container {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 6px rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            display: inline-block;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .highlights h3 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ff3b3b;
+        }
+
+        .highlights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlights li {
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        /* Call-to-Action Button */
+        .cta {
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #ff3b3b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: rgba(10, 10, 20, 0.9);
+            color: white;
+            padding: 8px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Raleway', sans-serif;
+            font-size: 14px;
+        }
+
+        /* Navbar Scroll Effect */
+        window.addEventListener("scroll", function() {
+            let navbar = document.querySelector("header");
+            if (window.scrollY > 50) {
+                navbar.style.background = "rgba(255, 59, 59, 0.9)";
+            } else {
+                navbar.style.background = "rgba(10, 10, 20, 0.9)";
+            }
+        });
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <h1>FestX - College Fest Management</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Welcome to FestX</h1>
+        <h2>Experience the most exciting college fest with thrilling events, competitions, and interactive quizzes!</h2>
+
+        <div class="highlights-container">
+            <div class="highlights">
+                <h3>Fest Highlights</h3>
+                <ul>
+                    <li>🎤 Celebrity Guest Talks</li>
+                    <li>🎶 Live Music & Dance Performances</li>
+                    <li>🏆 Exciting Competitions & Hackathons</li>
+                    <li>🎯 Fun Games & Quizzes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="register.html" class="btn">Login Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 FestX. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

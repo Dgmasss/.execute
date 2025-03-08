@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - FestX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e2a47, #3a4d7d);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(20, 30, 50, 0.9);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            border-bottom: 3px solid #4a6ea8;
+        }
+
+        /* Form Styling */
+        section {
+            margin: 80px auto;
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: black;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input::placeholder {
+            color: black;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        a {
+            display: block;
+            margin: 15px 0;
+            text-decoration: none;
+            background: #3d5a8a;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        a:hover {
+            background: #2c456d;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background: #3d5a8a;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2c456d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        FestX - Register Now
+    </header>
+
+    <section>
+        <h2>LOGIN HERE</h2>
+        <form id="registrationForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="number" id="phone" placeholder="Your Contact No." required>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfySnhl1bXbKuuLFb6901kw3j8CespRGe1DDQ_f3BgrzBmrGA/viewform?usp=dialog" target="_blank">Register for EVENTS</a>
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+
+            localStorage.setItem("festx_user_name", name);
+            localStorage.setItem("festx_user_email", email);
+
+            alert("Registration Successful! Redirecting to Dashboard...");
+            window.location.href = "dashboard.html";
+        });
+    </script>
+</body>
+</html>

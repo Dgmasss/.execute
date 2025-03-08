@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FestX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e2a47, #3a4d7d);
+            color: white;
+            text-align: center;
+            padding-bottom: 60px;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(20, 30, 50, 0.9);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            border-bottom: 3px solid #4a6ea8;
+        }
+
+        /* Dashboard Container */
+        #dashboard {
+            margin: 40px auto;
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-section {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .dashboard-section h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .dashboard-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dashboard-section li {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            color: black;
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #ff4d4d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #cc0000;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: rgba(20, 30, 50, 0.9);
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        FestX - Dashboard
+    </header>
+
+    <section id="dashboard">
+        <h2>Welcome, <span id="userName">Guest</span>!</h2>
+        <p>Email: <span id="userEmail">Not Provided</span></p>
+
+        <div class="dashboard-section">
+            <h3>Your Registered Events</h3>
+            <ul id="registeredEvents">
+                <li>No events registered yet.</li>
+            </ul>
+        </div>
+
+        <a href="#" class="logout-btn" onclick="clearUserData()">Logout</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 FestX. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function displayRegistrations() {
+            let eventsList = document.getElementById("registeredEvents");
+            let registrations = JSON.parse(localStorage.getItem("festx_registrations")) || [];
+
+            if (registrations.length > 0) {
+                eventsList.innerHTML = "";
+                registrations.forEach((entry) => {
+                    let listItem = document.createElement("li");
+                    listItem.textContent = `${entry.name} - ${entry.event}`;
+                    eventsList.appendChild(listItem);
+                });
+            }
+        }
+
+        document.getElementById("userName").textContent = localStorage.getItem("festx_user_name") || "Guest";
+        document.getElementById("userEmail").textContent = localStorage.getItem("festx_user_email") || "Not Provided";
+        displayRegistrations();
+
+        function clearUserData() {
+            localStorage.removeItem("festx_user_name");
+            localStorage.removeItem("festx_user_email");
+            localStorage.removeItem("festx_registrations");
+            alert("Logged out successfully!");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

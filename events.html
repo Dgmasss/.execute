@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Events - FestX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e2a47, #3a4d7d);
+            text-align: center;
+            color: white;
+        }
+
+        /* Header */
+        header {
+            background: rgba(20, 30, 50, 0.9);
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom: 3px solid #4a6ea8;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 40px;
+            text-transform: uppercase;
+        }
+
+        /* Events Container */
+        .events-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .event {
+            background: linear-gradient(135deg, #034778, #1b5b8f);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 250px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+        }
+
+        .event:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Event Details */
+        .event-details {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 20px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Sub-Events */
+        .sub-events-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .sub-event {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            color: black;
+            font-weight: bold;
+        }
+
+        .sub-event:hover {
+            transform: scale(1.1);
+        }
+
+        .sub-event img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Registration Form */
+        .registration-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .registration-form input, .registration-form button {
+            margin: 8px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .register-btn {
+            background: #0288d1;
+            color: white;
+            border: none;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            background: #01579b;
+        }
+
+        .close-btn {
+            background: #ff5252;
+            color: white;
+            border: none;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        FestX - College Events
+    </header>
+
+    <h1>Upcoming Events</h1>
+
+    <div class="events-container">
+        <div class="event" onclick="showDetails('event1-details')">Cultural Fest</div>
+        <div class="event" onclick="showDetails('event2-details')">Tech Symposium</div>
+        <div class="event" onclick="showDetails('event3-details')">Sports Meet</div>
+    </div>
+
+    <div id="event1-details" class="event-details">
+        <h2>Cultural Fest</h2>
+        <p>Includes dance, music, and drama competitions.</p>
+        <div class="sub-events-container">
+            <div class="sub-event" onclick="showRegistrationForm('Dance')">
+                <img src="https://th.bing.com/th/id/OIP.u_dG5DkSBHqY7qXORLsL-AHaIf?rs=1&pid=ImgDetMain" alt="Dance">
+                <span>Dance</span>
+            </div>
+            <div class="sub-event" onclick="showRegistrationForm('Music')">
+                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/music-logo%2C-guitar-logo%2C-music-3d-gold-logo-design-template-9071469bac7f2b3aebe8479257c04cdd_screen.jpg" alt="Music">
+                <span>Music</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="event2-details" class="event-details">
+        <h2>Tech Symposium</h2>
+        <p>Workshops, hackathons, and AI sessions.</p>
+    </div>
+
+    <div id="event3-details" class="event-details">
+        <h2>Sports Meet</h2>
+        <p>Cricket, football, and athletic competitions.</p>
+    </div>
+
+    <div id="registrationForm" class="registration-form">
+        <h2>Register for <span id="event-name"></span></h2>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="email" id="email" placeholder="Your Email">
+        <button class="register-btn" onclick="submitRegistration()">Submit</button>
+        <button class="close-btn" onclick="hideRegistrationForm()">Close</button>
+    </div>
+
+    <script>
+        function showDetails(eventId) {
+            document.querySelectorAll('.event-details').forEach(el => el.style.display = 'none');
+            document.getElementById(eventId).style.display = 'block';
+        }
+
+        function showRegistrationForm(eventName) {
+            document.getElementById('event-name').textContent = eventName;
+            document.getElementById('registrationForm').style.display = 'block';
+        }
+
+        function hideRegistrationForm() {
+            document.getElementById('registrationForm').style.display = 'none';
+        }
+
+        function submitRegistration() {
+            alert('Registration Successful!');
+            hideRegistrationForm();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Selection</title>
+   
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container" id="quiz-selection">
+        <h1>Select Your Quiz</h1>
+        <div class="quiz-flowchart">
+            <div class="quiz-node" onclick="startQuiz('cultural')">
+                <span>Cultural</span>
+            </div>
+            <div class="quiz-line"></div>
+            <div class="quiz-node" onclick="startQuiz('nmims')">
+                <span>About NMIMS</span>
+            </div>
+            <div class="quiz-line"></div>
+            <div class="quiz-node" onclick="startQuiz('technical')">
+                <span>Technical</span>
+            </div>
+            <div class="quiz-line"></div>
+            <div class="quiz-node" onclick="startQuiz('cricket')">
+                <span>Cricket</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-container" id="quiz-page" style="display: none;">
+        <h2 id="quiz-title"></h2>
+        <div id="question-container"></div>
+        <button id="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <div class="result-container" id="result-page" style="display: none;">
+        <h2>Quiz Completed!</h2>
+        <p id="score-result"></p>
+        <button onclick="restartQuiz()">Try Again</button>
+    </div>
+</body>
+</html>
+
+<style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e2842; /* Plain blue background */
+    color: white;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+/* Flowchart-like Quiz Selection */
+.quiz-flowchart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.quiz-node {
+    background-color: #ffffff;
+    color: #007bff;
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    text-align: center;
+}
+
+.quiz-node:hover {
+    background-color: #0056b3;
+    color: white;
+    transform: scale(1.1);
+}
+
+.quiz-line {
+    width: 50px;
+    height: 5px;
+    background-color: white;
+}
+
+/* Quiz Container */
+.quiz-container, .result-container {
+    margin-top: 50px;
+}
+
+#quiz-title {
+    font-size: 32px;
+}
+
+#question-container h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.option-btn {
+    display: block;
+    width: 50%;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #ffffff;
+    color: #007bff;
+    border-radius: 10px;
+}
+
+.option-btn:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.correct {
+    background-color: green !important;
+}
+
+.wrong {
+    background-color: red !important;
+}
+
+#next-btn {
+    background-color: #008CBA;
+    color: white;
+    font-size: 22px;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+#next-btn:hover {
+    background-color: #005f8a;
+}
+</style>
+
+<script>
+const quizzes = {
+    cultural: [
+    { question: "What is the national dance of India?", options: ["Kathak", "Bharatanatyam", "Kuchipudi", "Odissi"], answer: "Bharatanatyam" },
+        { question: "Which Indian state is famous for its Bihu festival?", options: ["Assam", "Punjab", "Kerala", "Gujarat"], answer: "Assam" },
+        { question: "Who wrote the Indian national anthem?", options: ["Rabindranath Tagore", "Bankim Chandra Chattopadhyay", "Sarojini Naidu", "Subramania Bharati"], answer: "Rabindranath Tagore" },
+        { question: "Which is the largest festival celebrated in Kerala?", options: ["Pongal", "Onam", "Bihu", "Dussehra"], answer: "Onam" },
+        { question: "Which Indian city is known as the 'Cultural Capital of India'?", options: ["Varanasi", "Kolkata", "Jaipur", "Chennai"], answer: "Kolkata" },
+        { question: "Which classical dance form originated from Tamil Nadu?", options: ["Bharatanatyam", "Kathak", "Manipuri", "Odissi"], answer: "Bharatanatyam" },
+        { question: "Makar Sankranti is known by which name in Tamil Nadu?", options: ["Pongal", "Lohri", "Bihu", "Ugadi"], answer: "Pongal" },
+        { question: "Which festival marks the Sikh New Year?", options: ["Baisakhi", "Diwali", "Holi", "Navratri"], answer: "Baisakhi" },
+        { question: "Which is the most widely celebrated harvest festival in Punjab?", options: ["Baisakhi", "Lohri", "Onam", "Makar Sankranti"], answer: "Lohri" },
+        { question: "Which festival is known as the festival of colors?", options: ["Diwali", "Holi", "Navratri", "Pongal"], answer: "Holi" }
+],
+    nmims: [
+        { question: "What does NMIMS stand for?", options: ["Narsee Monjee Institute of Management Studies", "National Management Institute for Science", "New Modern Institute of Management Studies", "None of the above"], answer: "Narsee Monjee Institute of Management Studies" },
+        { question: "When was NMIMS Indore established?", options: ["2019", "2017", "2015", "2018"], answer: "2017" },
+        { question: "Which club organizes a 36-hour Hackathon in NMIMS?", options: ["Turing", "Malhar", "Sangam", "GDSC"], answer: "Turing" },
+        { question: "Which of the following places does not have an NMIMS campus?", options: ["Shirpur", "Indore", "Mumbai", "Jaipur"], answer: "Jaipur" },
+        { question: "Which club organizes NMOTSAV in NMIMS?", options: ["Turing", "Malhar", "Sangam", "GDSC"], answer: "Sangam" },
+        { question: "Which club organizes Chaupal in NMIMS?", options: ["Turing", "Samatva", "Sangam", "GDSC"], answer: "Samatva" },
+        { question: "Which club collaborates with Gen AI in NMIMS?", options: ["Turing", "Malhar", "Sangam", "GDSC"], answer: "GDSC" },
+        { question: "Which club organizes Dholida in NMIMS?", options: ["Turing", "Malhar", "Sangam", "GDSC"], answer: "Sangam" },
+        { question: "Which club organizes Diznex in NMIMS?", options: ["Turing", "Malhar", "Sangam", "GDSC"], answer: "Turing" },
+        { question: "Who was the center of attraction in NMOTSAV 2024?", options: ["Asees Kaur", "Raj Anadkat", "Sohail Khan", "Amaal Malik"], answer: "Amaal Malik" },
+        { question: "Who is the Dean of our college?", options: ["Dr. Anshuman Jaswal", "Dr. Divya Gautam", "Dr. Ajith Singh", "Dr. Pushpanjay K Sinsh"], answer: "Dr. Anshuman Jaswal" }
+    ],
+    technical: [
+    { question: "What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Learning", "Hyperlink and Text Management Language", "None"], answer: "Hyper Text Markup Language" },
+        { question: "What will be the output of the following C++ code snippet? int x = 5; cout << x++ << ' ' << ++x;", options: ["5 6", "5 7", "6 7", "Compilation Error"], answer: "5 7" },
+        { question: "Which programming language is known for AI development?", options: ["Python", "C++", "Java", "Ruby"], answer: "Python" },
+        { question: "What is the main purpose of a constructor in C++?", options: ["To destroy an object", "To initialize an object", "To allocate memory manually", "To declare a function"], answer: "To initialize an object" },
+        { question: "Which feature of C++ allows the same function name to have different implementations?", options: ["Inheritance", "Polymorphism", "Encapsulation", "Abstraction"], answer: "Polymorphism" },
+        { question: "What is the difference between struct and class in C++?", options: ["struct members are private by default, whereas class members are public by default", "class members are private by default, whereas struct members are public by default", "struct and class are completely identical", "struct cannot have member functions, but class can"], answer: "class members are private by default, whereas struct members are public by default" },
+        { question: "Which of the following is NOT a fundamental data type in C++?", options: ["int", "float", "char", "string"], answer: "string" },
+        { question: "What is the difference between a list and a tuple in Python?", options: ["Lists are mutable, while tuples are immutable", "Lists are immutable, while tuples are mutable", "There is no difference; both are the same", "Tuples consume more memory than lists"], answer: "Lists are mutable, while tuples are immutable" },
+        { question: "Which keyword is used to define a function in Python?", options: ["function", "def", "define", "func"], answer: "def" },
+        { question: "Which of the following is an example of a dynamically typed language?", options: ["C++", "Python", "Java", "C"], answer: "Python" },
+        { question: "Which of the following concepts is used for reusing existing code in C++?", options: ["Polymorphism", "Inheritance", "Encapsulation", "Abstraction"], answer: "Inheritance" }
+    ],
+    cricket:[
+    { question: "Who has the highest number of international centuries?", options: ["Virat Kohli", "Sachin Tendulkar", "Ricky Ponting", "MS Dhoni"], answer: "Sachin Tendulkar" },
+        { question: "Which country won the first-ever Cricket World Cup in 1975?", options: ["India", "Australia", "West Indies", "England"], answer: "West Indies" },
+        { question: "Who is known as the 'God of Cricket'?", options: ["MS Dhoni", "Sachin Tendulkar", "Virat Kohli", "Ricky Ponting"], answer: "Sachin Tendulkar" },
+        { question: "Which player holds the record for the fastest T20 international century?", options: ["Chris Gayle", "David Miller", "Rohit Sharma", "AB de Villiers"], answer: "David Miller" },
+        { question: "Which format of cricket is the shortest?", options: ["Test", "ODI", "T20", "The Hundred"], answer: "T20" },
+        { question: "Which of the following fielding positions is closest to the batsman?", options: ["Deep mid-wicket", "Cover", "Silly point", "Square leg"], answer: "Silly point" },
+        { question: "Who is the only batsman to score 100 international centuries across all formats?", options: ["Virat Kohli", "Ricky Ponting", "Jacques Kallis", "Sachin Tendulkar"], answer: "Sachin Tendulkar" },
+        { question: "What is the term used when a batsman is dismissed without scoring any runs?", options: ["Duck", "Golden duck", "Clean bowled", "Stumped"], answer: "Duck" },
+        { question: "Who was the captain of the Indian cricket team when they won the 2011 ICC World Cup?", options: ["Virat Kohli", "Sourav Ganguly", "MS Dhoni", "Sachin Tendulkar"], answer: "MS Dhoni" }
+    ]
+};
+
+let currentQuiz = [];
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startQuiz(topic) {
+    document.getElementById("quiz-selection").style.display = "none";
+    document.getElementById("quiz-page").style.display = "block";
+    document.getElementById("result-page").style.display = "none";
+    document.getElementById("quiz-title").innerText = topic.charAt(0).toUpperCase() + topic.slice(1) + " Quiz";
+    currentQuiz = quizzes[topic];
+    currentQuestionIndex = 0;
+    score = 0;
+    showQuestion();
+}
+
+function showQuestion() {
+    const questionContainer = document.getElementById("question-container");
+    questionContainer.innerHTML = "";
+    const questionObj = currentQuiz[currentQuestionIndex];
+    const questionText = document.createElement("h3");
+    questionText.innerText = questionObj.question;
+    questionContainer.appendChild(questionText);
+    
+    questionObj.options.forEach(option => {
+        const button = document.createElement("button");
+        button.innerText = option;
+        button.classList.add("option-btn");
+        button.onclick = () => checkAnswer(option, questionObj.answer, button);
+        questionContainer.appendChild(button);
+    });
+}
+
+function checkAnswer(selected, correct, button) {
+    if (selected === correct) {
+        score++;
+        button.classList.add("correct");
+    } else {
+        button.classList.add("wrong");
+    }
+    setTimeout(nextQuestion, 1000);
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < currentQuiz.length) {
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    document.getElementById("quiz-page").style.display = "none";
+    document.getElementById("result-page").style.display = "block";
+    document.getElementById("score-result").innerText = `Your score: ${score}/${currentQuiz.length}`;
+}
+
+function restartQuiz() {
+    document.getElementById("quiz-selection").style.display = "block";
+    document.getElementById("result-page").style.display = "none";
+}
+</script>
